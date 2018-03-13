@@ -1,0 +1,2 @@
+rootProject.name = 'command-control'
+include "command-control-model"
