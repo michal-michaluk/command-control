@@ -47,19 +47,19 @@ Feature: Leadership handover form new superior perspective
 
   Scenario: New superior initiates handover, Current Superior responds Cantco
     Given handover procedure already started on "New Superior" and addresses "Current Superior" and "Subordinate"
-    When "Cantco" message is received from "Current Superior"
+    When "Cantco" message from "Current Superior" is received by "New Superior"
     Then status of "#1 Handover" on "New Superior"s Given Commands changes to "Cantco"
     And no message is send from "New Superior"
 
   Scenario: Handover over link16, Subordinate responds Cantpro, Control Unit Change over radio
     Given handover procedure on "New Superior" is in control unit change stage, addressing "Current Superior" and "Subordinate"
-    When "Cantpro" message is received from "Subordinate"
+    When "Cantpro" message from "Subordinate" is received by "New Superior"
     Then status of "#2 Control Unit Change" on "New Superior"s Given Commands changes to "Cantpro"
     And no message is send from "New Superior"
 
     Given "New Superior" gives "Subordinate" Control Unit Change order over radio
 
-    When "Status" message from "Subordinate" confirming "New Superior" as CU is received by "New Superior"
+    When Status message from "Subordinate" confirming "New Superior" as CU is received by "New Superior"
     Then status of "#2 Control Unit Change" on "New Superior"s Given Commands changes to "Done"
 
   Scenario: Handover over radio, Control Unit Change over link16
