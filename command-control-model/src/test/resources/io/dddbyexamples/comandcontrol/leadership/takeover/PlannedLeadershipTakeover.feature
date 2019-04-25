@@ -9,31 +9,31 @@ Feature: Planned leadership takeover
 
   class UnnamedYellowCard {
 
-    ObjectId newSuperior
+  ObjectId newSuperior
 
-    CommandHierarchy hierarchy
-    CurrentCommandList currentCommandList
-    CommunicationChannel communicationChannel
+  CommandHierarchy hierarchy
+  CurrentCommandList currentCommandList
+  CommunicationChannel communicationChannel
 
-    void requestHandover(RequestHandover command)
-      Optional<ObjectId> currentSuperior = hierarchy.superiorOfSubordinate(subordinate)
-      if (currentSuperior.isEmpty()) {
-        // ???
-      }
-      var newCommand = new LeadershipHandoverStarted(subordinate, currentSuperior, newSuperior)
-      currentCommandList.addOutgoingCommand(newCommand)
+  void requestHandover(RequestHandover command)
+  Optional<ObjectId> currentSuperior = hierarchy.superiorOfSubordinate(subordinate)
+  if (currentSuperior.isEmpty()) {
+  // ???
+  }
+  var newCommand = new LeadershipHandoverStarted(subordinate, currentSuperior, newSuperior)
+  currentCommandList.addOutgoingCommand(newCommand)
 
-      communicationChannel.send(newCommand)
+  communicationChannel.send(newCommand)
   }
 
   class RequestHandover { // blue card
-    ObjectId subordinate
+  ObjectId subordinate
   }
 
   class LeadershipHandoverStarted { // orange card
-    ObjectId subordinate
-    ObjectId currentSuperior
-    ObjectId newSuperior
+  ObjectId subordinate
+  ObjectId currentSuperior
+  ObjectId newSuperior
   }
 
   class CurrentCommandList { // green card
@@ -42,7 +42,7 @@ Feature: Planned leadership takeover
 
   interface CommandHierarchy {
 
-    Optional<ObjectId> superiorOfSubordinate(ObjectId subordinate)
+  Optional<ObjectId> superiorOfSubordinate(ObjectId subordinate)
 
   }
 
@@ -52,8 +52,35 @@ Feature: Planned leadership takeover
 
   }
 
+
   Scenario: New superior initiating handover
-    Given Current Superior is controlling unit of Subordinate
+    Given "Current Superior" is controlling unit of "Subordinate"
+    #from new superior perspective:
+    When New Superior requests handover of Subordinate
+    Then handover procedure starts and addresses Current Superior of Subordinate
+    And current command list New Superior contains new order
+    And message is send to Current Superior
+
+    When "Wilco" message is received from "Current Superior"
+    ...
+
+
+  Scenario: New superior initiating handover
+    Given "Current Superior" is controlling unit of "Subordinate"
+    #from new superior perspective:
+    When New Superior requests handover of Subordinate
+    Then handover procedure starts and addresses Current Superior of Subordinate
+    And current command list New Superior contains new order
+    And message is send to Current Superior
+
+
+  Scenario:
+    Given handover was initialised and message sent to Current Superior
+    When "Wilco" message is received from "Current Superior"
+  ...
+
+  Scenario: New superior initiating handover
+    Given "Current Superior" is controlling unit of "Subordinate"
     #from new superior perspective:
     When New Superior requests handover of Subordinate
     Then handover procedure starts and addresses Current Superior of Subordinate
@@ -66,6 +93,18 @@ Feature: Planned leadership takeover
 
     When Current Superior allows handover
     Then Wilco message is send to New Superior
+
+
+    #TODO finish this scenario
+    #from new superior perspective:
+    #from subordinate perspective:
+
+  Scenario: New superior initiating handover, Current Superior responds cantco
+    Given Current Superior got handover Request order
+
+    When Current Superior rejects handover request
+    Then Cantco message is send to New Superior
+
 
     #TODO finish this scenario
     #from new superior perspective:
