@@ -4,7 +4,6 @@ import io.dddbyexamples.comandcontrol.ObjectID;
 import lombok.Value;
 
 @Value
-public class InitialiseTakeover {
-    ObjectID newSuperior;
-    ObjectID subordinate;
+public class OrderAccepted {
+    ObjectID originator;
 }

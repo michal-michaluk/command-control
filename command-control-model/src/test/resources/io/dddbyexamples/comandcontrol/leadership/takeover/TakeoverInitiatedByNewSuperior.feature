@@ -28,6 +28,11 @@ Feature: Leadership takeover initiated by new superior perspective
 
   Background:
     Given "Current Superior" is controlling unit of "Subordinate"
+    Given objects:
+      | alias            | internalID | link16ID | description    |
+      | Current Superior | 12013      | A0013    | Ground control |
+      | New Superior     | 19104      | A0104    | NATO AWACS     |
+      | Subordinate      | 12066      | A0066    | F16            |
 
   Scenario: Full handover
     When "New Superior" requests handover of "Subordinate"
@@ -81,17 +86,16 @@ Feature: Leadership takeover initiated by new superior perspective
     Then status of "#2 Control Unit Change" on "New Superior"s Given Commands changes to "Done"
 
 
-
-
-
-
-
   Scenario: Current Superior initiating takeover
+
   Scenario: C2 to C2 negotiation over radio + New Superior and subordinate handover over Link16
+
   Scenario: C2 to C2 negotiation over Link16 + New Superior and subordinate handover over radio
 
   Scenario: New Superior initiating control unit change to Subordinate
+
   Scenario: Subordinate initiating control unit change to New Superior
 
   Scenario: Distribution information about current mission
+
   Scenario: Presentation of unknown mission progress

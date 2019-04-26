@@ -1,18 +1,37 @@
 package io.dddbyexamples.comandcontrol.leadership.takeover;
 
 import cucumber.api.PendingException;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import io.dddbyexamples.comandcontrol.commands.GivenCommands;
+import io.dddbyexamples.comandcontrol.Aliases;
+import io.dddbyexamples.comandcontrol.ObjectID;
+import io.dddbyexamples.comandcontrol.commands.SentCommands;
+import lombok.Value;
+
+import java.util.List;
 
 public class LeadershipTakeoverSteps {
 
     private LeadershipTakeoverFacade facade;
-    private GivenCommands commands;
+    private SentCommands commands;
+
+    private Aliases<ObjectID> objectIds = new Aliases<>();
+
+    @Given("^objects:$")
+    public void objects(List<ObjectDef> objects) {
+        objects.forEach(object -> objectIds.put(
+                object.getAlias(),
+                object.getObjectID()
+        ));
+    }
 
     @When("^\"([^\"]*)\" requests handover of \"([^\"]*)\"$")
     public void requestsHandoverOf(String newSuperior, String subordinate) throws Throwable {
-        InitialiseTakeover command = null;
+        InitialiseTakeover command = new InitialiseTakeover(
+                objectIds.of(newSuperior),
+                objectIds.of(subordinate)
+        );
         facade.initialiseHandover(command);
     }
 
@@ -39,5 +58,24 @@ public class LeadershipTakeoverSteps {
         commands.getStatsOf(commandID);
 
         throw new PendingException();
+    }
+
+    @Value
+    public static class ObjectDef {
+        String alias;
+        long internalID;
+        String link16ID;
+        String description;
+
+        public ObjectDef(String alias, long internalID, String link16ID, String description) {
+            this.alias = alias;
+            this.internalID = internalID;
+            this.link16ID = link16ID;
+            this.description = description;
+        }
+
+        public ObjectID getObjectID() {
+            return new ObjectID(internalID, link16ID);
+        }
     }
 }
