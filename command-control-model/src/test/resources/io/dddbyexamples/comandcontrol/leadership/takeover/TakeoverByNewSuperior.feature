@@ -1,4 +1,4 @@
-Feature: Leadership handover form new superior perspective
+Feature: Leadership takeover initiated by new superior perspective
 
   Domain Story:
   handover procedure start:
@@ -51,6 +51,12 @@ Feature: Leadership handover form new superior perspective
     Then status of "#1 Handover" on "New Superior"s Given Commands changes to "Cantco"
     And no message is send from "New Superior"
 
+  Scenario: New superior initiates handover, Current Superior not responds
+    Given handover procedure already started on "New Superior" and addresses "Current Superior" and "Subordinate"
+    When not message from "Current Superior" was received by "New Superior"
+    Then status of "#1 Handover" on "New Superior"s Given Commands changes to "Timeout"
+    And no message is send from "New Superior"
+
   Scenario: Handover over link16, Subordinate responds Cantpro, Control Unit Change over radio
     Given handover procedure on "New Superior" is in control unit change stage, addressing "Current Superior" and "Subordinate"
     When "Cantpro" message from "Subordinate" is received by "New Superior"
@@ -80,28 +86,12 @@ Feature: Leadership handover form new superior perspective
 
 
 
-
-
-
-  Scenario: New superior initiating handover when Current Superior is unknown
-
-  Scenario: Current superior initiating takeover
-
-  Scenario: Distribution information about current mission
-
-  Scenario: Presentation of unknown mission progress
-
-
-
-
+  Scenario: Current Superior initiating takeover
   Scenario: C2 to C2 negotiation over radio + New Superior and subordinate handover over Link16
-
   Scenario: C2 to C2 negotiation over Link16 + New Superior and subordinate handover over radio
 
-  Scenario: Lost Contact with current superior and lookup for new superior
+  Scenario: New Superior initiating control unit change to Subordinate
+  Scenario: Subordinate initiating control unit change to New Superior
 
-  Scenario: Lost Contact during leadership takeover procedure 1
-
-  Scenario: Lost Contact during leadership takeover procedure 2
-
-  Scenario: Lost Contact during leadership takeover procedure 3
+  Scenario: Distribution information about current mission
+  Scenario: Presentation of unknown mission progress

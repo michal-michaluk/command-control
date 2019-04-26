@@ -12,7 +12,7 @@ public class LeadershipTakeoverSteps {
 
     @When("^\"([^\"]*)\" requests handover of \"([^\"]*)\"$")
     public void requestsHandoverOf(String newSuperior, String subordinate) throws Throwable {
-        InitialiseHandover command = null;
+        InitialiseTakeover command = null;
         facade.initialiseHandover(command);
     }
 
