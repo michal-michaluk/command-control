@@ -1,6 +1,7 @@
 package io.dddbyexamples.comandcontrol.leadership.takeover;
 
 import cucumber.api.PendingException;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -57,6 +58,66 @@ public class LeadershipTakeoverSteps {
     public void statusOfOnSGivenCommandsChangesTo(String commandID, String originObject, String status) throws Throwable {
         commands.getStatsOf(commandID);
 
+        throw new PendingException();
+    }
+
+    @Given("^\"([^\"]*)\" is controlling unit of \"([^\"]*)\"$")
+    public void isControllingUnitOf(String arg0, String arg1) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
+    }
+
+    @Then("^handover procedure started on \"([^\"]*)\" and addresses \"([^\"]*)\" and \"([^\"]*)\"$")
+    public void handoverProcedureStartedOnAndAddressesAnd(String arg0, String arg1, String arg2) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
+    }
+
+    @And("^Given Commands of \"([^\"]*)\" contains \"([^\"]*)\"$")
+    public void givenCommandsOfContains(String arg0, String arg1) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
+    }
+
+    @And("^\"([^\"]*)\" message is send to \"([^\"]*)\"$")
+    public void messageIsSendTo(String arg0, String arg1) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
+    }
+
+    @Given("^handover procedure already started on \"([^\"]*)\" and addresses \"([^\"]*)\" and \"([^\"]*)\"$")
+    public void handoverProcedureAlreadyStartedOnAndAddressesAnd(String arg0, String arg1, String arg2) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
+    }
+
+    @And("^no message is send from \"([^\"]*)\"$")
+    public void noMessageIsSendFrom(String arg0) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
+    }
+
+    @When("^not message from \"([^\"]*)\" was received by \"([^\"]*)\"$")
+    public void notMessageFromWasReceivedBy(String arg0, String arg1) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
+    }
+
+    @Given("^handover procedure on \"([^\"]*)\" is in control unit change stage, addressing \"([^\"]*)\" and \"([^\"]*)\"$")
+    public void handoverProcedureOnIsInControlUnitChangeStageAddressingAnd(String arg0, String arg1, String arg2) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
+    }
+
+    @Given("^\"([^\"]*)\" gives \"([^\"]*)\" Control Unit Change order over radio$")
+    public void givesControlUnitChangeOrderOverRadio(String arg0, String arg1) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
+    }
+
+    @Given("^\"([^\"]*)\" gives \"([^\"]*)\" Handover Request over radio$")
+    public void givesHandoverRequestOverRadio(String arg0, String arg1) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
     }
 

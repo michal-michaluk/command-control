@@ -11,6 +11,7 @@ import java.time.Instant;
 @AllArgsConstructor
 public class HandoverProcedure {
 
+    // ports
     private final HandoverProcedureEvents events;
     private final Clock clock;
 
@@ -19,7 +20,7 @@ public class HandoverProcedure {
     private HandoverStarted handoverStarted;
     private HandoverAccepted handoverAccepted;
 
-
+    // emited events: Orange Cards
     interface HandoverProcedureEvents {
         void emit(HandoverStarted event);
 
@@ -54,5 +55,4 @@ public class HandoverProcedure {
             events.emit(handoverAccepted);
         }
     }
-
 }
